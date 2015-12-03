@@ -6,8 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import uk.co.pped.policeapi.model.EngagementMethodModel;
-
-
+import uk.co.pped.policeapi.model.PersonModel;
 import uk.co.pped.policeapi.utilities.Log4JHelper;
 
 /**
@@ -31,13 +30,20 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 	/** The telephone number for that force */
 	private String telephoneNumber;
 	
-	// TODO: Create force seniorOfficers/person bean/model.
-	private List<? extends String> seniorOfficers;
+	private List<PersonModel> seniorOfficers;
+	
+	// TODO: Create Neighbourhood model/bean
+	private List<? extends String> neighbourhoods;
 
 	public ForceBean(String name, String id) {
 		super(id);
 		this.name = name;
 		this.engagementMethods = new ArrayList<EngagementMethodModel>();
+	}
+	
+	
+	public String getName() {
+		return name;
 	}
 	
 	public void setForceWebsiteURL(String forceWebsiteURL) {
