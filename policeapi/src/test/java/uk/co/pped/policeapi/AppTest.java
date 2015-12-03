@@ -1,4 +1,4 @@
-package uk.co.pped.api.police.client;
+package uk.co.pped.policeapi;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -1,4 +1,4 @@
-package uk.co.pped.api.police.client;
+package uk.co.pped.policeapi;
 
 /**
  * Hello world!
