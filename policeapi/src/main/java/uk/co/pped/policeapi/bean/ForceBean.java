@@ -39,8 +39,9 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 		super(id);
 		this.name = name;
 		this.engagementMethods = new ArrayList<EngagementMethodModel>();
+		this.seniorOfficers = null;
+		this.neighbourhoods = null;
 	}
-	
 	
 	public String getName() {
 		return name;
@@ -70,7 +71,7 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 		return engagementMethods;
 	}
 	
-	public boolean addengagementMethod(EngagementMethodModel engagementMethod) {
+	public boolean addEngagementMethod(EngagementMethodModel engagementMethod) {
 		return engagementMethods.add(engagementMethod);
 	}
 }
