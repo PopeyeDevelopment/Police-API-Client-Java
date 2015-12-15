@@ -8,8 +8,16 @@ public class PersonModel extends BaseObjectModel {
 	
 	private RankTypes rank;
 	
+	private String collarNumber;
+	
+	private String warrentNumber;
+	
 	public PersonModel() {
-		
+		super("");
+	}
+	
+	public PersonModel(String id) {
+		super(id);
 	}
 	
 	public void setName(String name) {
@@ -27,4 +35,21 @@ public class PersonModel extends BaseObjectModel {
 	public RankTypes getRank() {
 		return rank;
 	}
+	
+	public String getCollarNumber() {
+		return collarNumber;
+	}
+
+	public void setCollarNumber(String collarNumber) {
+		this.collarNumber = collarNumber;
+	}
+
+	public String getWarrentNumber() {
+		return warrentNumber;
+	}
+
+	public void setWarrentNumber(String warrentNumber) {
+		this.warrentNumber = warrentNumber;
+	}
+
 }

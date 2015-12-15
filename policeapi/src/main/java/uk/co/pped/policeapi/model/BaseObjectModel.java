@@ -1,5 +1,10 @@
 package uk.co.pped.policeapi.model;
 
-public abstract class BaseObjectModel implements java.io.Serializable {
-
+abstract class BaseObjectModel implements java.io.Serializable {
+	
+	private final String id;
+		
+	protected BaseObjectModel(String id) {
+		this.id = id;
+	}
 }

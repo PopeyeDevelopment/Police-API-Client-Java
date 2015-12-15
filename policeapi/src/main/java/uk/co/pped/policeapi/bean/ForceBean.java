@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import uk.co.pped.policeapi.model.EngagementMethodModel;
+import uk.co.pped.policeapi.model.NeighbourhoodModel;
 import uk.co.pped.policeapi.model.PersonModel;
 import uk.co.pped.policeapi.utilities.Log4JHelper;
 
@@ -33,7 +34,7 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 	private List<PersonModel> seniorOfficers;
 	
 	// TODO: Create Neighbourhood model/bean
-	private List<? extends String> neighbourhoods;
+	private List<NeighbourhoodModel> neighbourhoods;
 
 	public ForceBean(String name, String id) {
 		super(id);
