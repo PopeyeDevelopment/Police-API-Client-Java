@@ -123,4 +123,8 @@ public class SessionState implements Serializable {
 		}
 	}
 	
+	public ForceBean getSelectedForce() {
+		return selectedForce;
+	}
+	
 }
