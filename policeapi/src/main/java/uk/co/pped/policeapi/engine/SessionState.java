@@ -23,8 +23,10 @@ public class SessionState implements Serializable {
 	
 	private HttpServletRequest request;
 	
+	/** Holds all the forces that have been loaded in. */
 	private Map<String, ForceBean> forces;
 	
+	/** Holds the currently selected force. */ 
 	private ForceBean selectedForce;
 	
 	/**
@@ -106,10 +108,22 @@ public class SessionState implements Serializable {
 		return fb.containsKey(forceName);
 	}
 	
+	/**
+	 * Getter for getting all the forces that have been loaded into the 
+	 * apps session state.
+	 * @return a Map containing all the forces that have been loaded in.
+	 */
 	public Map<String, ForceBean> getForces() {
 		return forces;
 	}
 	
+	/**
+	 * Setter for setting the selected force that the user is currently looking at.
+	 * If the force doesn't exist in the available forces that have been loaded in
+	 * or we have passed null in then we will throw an exception and log the error,
+	 * if you'd like to reset the selected force then you should be using resetForce.
+	 * @param selectedForce
+	 */
 	public void setSelectedForce(ForceBean selectedForce) {
 		try {
 			if (selectedForce != null
@@ -123,6 +137,10 @@ public class SessionState implements Serializable {
 		}
 	}
 	
+	/**
+	 * Getter for getting the selected force.
+	 * @return the selected force.
+	 */
 	public ForceBean getSelectedForce() {
 		return selectedForce;
 	}

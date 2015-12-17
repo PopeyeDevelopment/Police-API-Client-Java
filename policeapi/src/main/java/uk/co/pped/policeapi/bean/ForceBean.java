@@ -35,6 +35,8 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 	
 	// TODO: Create Neighbourhood model/bean
 	private List<NeighbourhoodModel> neighbourhoods;
+	
+	private boolean ignoreForce;
 
 	public ForceBean(String name, String id) {
 		super(id);
@@ -42,6 +44,8 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 		this.engagementMethods = new ArrayList<EngagementMethodModel>();
 		this.seniorOfficers = null;
 		this.neighbourhoods = null;
+		// Default no force is ignored
+		this.ignoreForce = false;
 	}
 	
 	public String getName() {
@@ -74,5 +78,13 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 	
 	public boolean addEngagementMethod(EngagementMethodModel engagementMethod) {
 		return engagementMethods.add(engagementMethod);
+	}
+	
+	public void setIgnoreForce(boolean ignoreForce) {
+		this.ignoreForce = ignoreForce;
+	}
+
+	public boolean isIgnoreForce() {
+		return ignoreForce;
 	}
 }
