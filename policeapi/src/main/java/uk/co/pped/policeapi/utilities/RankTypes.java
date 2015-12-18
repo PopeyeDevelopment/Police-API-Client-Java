@@ -1,11 +1,21 @@
 package uk.co.pped.policeapi.utilities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 
 public enum RankTypes {
 	
+	private static final Integer PCSO_INT = 1;
+	private static final Integer CONSTALBE_INT = 2;
+	
 	PCSO("PCSO"),
-	SC("SC"),
+	SC("SC") {
+		public final int getRankLevel() {
+			return CONSTALBE_INT;
+		}
+	},
 	PC("PC"),
 	DC("DC"),
 	SS("SS"),
@@ -24,6 +34,9 @@ public enum RankTypes {
 	DCC("DCC"),
 	CC("CC"),
 	UNKNOWN("UU");
+	public abstract int getRankLevel();
+	private static final Integer PCSO_INT = 1;
+	private static final Integer CONSTALBE_INT = 2;
 	
 	private final String rankType;
 	
@@ -131,9 +144,12 @@ public enum RankTypes {
 			case "CC":
 				return "Chief Constable";
 			default:
-				return "UNKNOWN";
-				
+				return "UNKNOWN";		
 		}
 	}
 	
+	public static Map<RankTypes, Integer> ranks() {
+		return ranks;
+	}
+
 }

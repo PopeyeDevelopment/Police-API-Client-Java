@@ -1,16 +1,12 @@
 package uk.co.pped.policeapi.model;
 
-import uk.co.pped.policeapi.utilities.RankTypes;
-
 public class PersonModel extends BaseObjectModel {
 	
-	private String name;
+	private String forename;
 	
-	private RankTypes rank;
-	
-	private String collarNumber;
-	
-	private String warrentNumber;
+	private String surname;
+		
+	private String title;
 	
 	public PersonModel() {
 		super("");
@@ -20,36 +16,28 @@ public class PersonModel extends BaseObjectModel {
 		super(id);
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
+	}
+
+	public void setForename(String forename) {
+		this.forename = forename;
 	}
 	
-	public void setRank(RankTypes rank) {
-		this.rank = rank;
+	public String getForename() {
+		return forename;
 	}
 	
-	public RankTypes getRank() {
-		return rank;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 	
-	public String getCollarNumber() {
-		return collarNumber;
+	public String getSurname() {
+		return surname;
 	}
-
-	public void setCollarNumber(String collarNumber) {
-		this.collarNumber = collarNumber;
-	}
-
-	public String getWarrentNumber() {
-		return warrentNumber;
-	}
-
-	public void setWarrentNumber(String warrentNumber) {
-		this.warrentNumber = warrentNumber;
-	}
-
+	
 }
