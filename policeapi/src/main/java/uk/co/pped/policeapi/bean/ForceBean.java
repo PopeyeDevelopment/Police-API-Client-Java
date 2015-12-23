@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import uk.co.pped.policeapi.model.EngagementMethodModel;
 import uk.co.pped.policeapi.model.NeighbourhoodModel;
 import uk.co.pped.policeapi.model.OfficerModel;
 import uk.co.pped.policeapi.model.PersonModel;
+import uk.co.pped.policeapi.utilities.Force;
 import uk.co.pped.policeapi.utilities.Log4JHelper;
 import uk.co.pped.policeapi.utilities.RankTypes;
 
@@ -23,7 +25,7 @@ import uk.co.pped.policeapi.utilities.RankTypes;
 public class ForceBean extends AbstractBean implements java.io.Serializable, Cloneable {
 
 	private static final Logger LOGGER = Log4JHelper.getLogger(ForceBean.class);
-	
+		
 	/** The name of that force */
 	private final String name;
 	
@@ -43,9 +45,32 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 		
 	private boolean ignoreForce;
 
-	public ForceBean(String name, String id) {
+	public ForceBean(Force force) throws NullPointerException {
+		super(force.getForceID());
+
+		if (!force.isForceKnown()) {
+			// Throw an exception for unknown force.
+		}
+		
+		this.name = force.getForceName();
+		this.engagementMethods = new ArrayList<EngagementMethodModel>();
+		this.seniorOfficers = null;
+		this.neighbourhoods = null;
+		// Default no force is ignored
+		this.ignoreForce = false;
+	}
+	
+	public ForceBean(String id) {
 		super(id);
-		this.name = name;
+		
+		// Get an instance of the force we want with the id passed in.
+		Force force = Force.getForceWithID(id);
+		
+		if (!force.isForceKnown()) {
+			// Throw an exception for unknown force.
+		}
+		
+		this.name = force.getForceName();
 		this.engagementMethods = new ArrayList<EngagementMethodModel>();
 		this.seniorOfficers = null;
 		this.neighbourhoods = null;
@@ -110,9 +135,17 @@ public class ForceBean extends AbstractBean implements java.io.Serializable, Clo
 		
 		List<OfficerModel> seniorOfficers = getSeniorOfficers();
 		
+		// If we have no Senior officers don't continue just return
 		if (CollectionUtils.isEmpty(seniorOfficers)) {
 			LOGGER.info("getMostSeniorRankingOfficer: this force doesn't have any senior ranking officers currently.");
 			return mostSeniorOfficer;
+		}
+		
+		// Loop through all the Senior Officers until we have the most Senior.
+		for (OfficerModel officer : seniorOfficers) {
+			if (officer.isRankHigher(mostSeniorOfficer)) {
+				mostSeniorOfficer = officer;
+			}
 		}
 		
 		return mostSeniorOfficer;
