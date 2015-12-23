@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.popeyedevelopment.com/ForceConfig" xmlns:tns="http://www.popeyedevelopment.com/ForceConfig" elementFormDefault="qualified">
+	<xsd:element name="ForceConfiguration" >
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Holds the configuration for the Force Configuration mapping.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element name="ForceConfig" type="ForceConfigType" minOccurs="0" maxOccurs="1" />
+		</xsd:choice>
+	</xsd:element>
+	
+	<xsd:complexType name="ForceConfigType" >
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element name="PoliceData" type="UpdatePeriodType" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="LocalData" type="PPEDDataAccessType" minOccurs="0" maxOccurs="1" />
+		</xsd:choice>
+		 <xsd:attribute name="name" type="xsd:string" use="required">
+         <xsd:annotation>
+            <xsd:documentation>The name of the config.</xsd:documentation>
+         </xsd:annotation>
+      </xsd:attribute>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PPEDDataAccessType">
+		<xsd:choice>
+			<xsd:element name="Address" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="OperatorID" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="OperatorPassword" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="DatabaseName" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="TableName" type="DatabaseTableType" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:choice>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UpdatePeriodType">
+		<xsd:choice>
+			<xsd:element name="UpdateType" type="UpdateTypeType" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="UpdatePeriod" type="UpdatePeriodType" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="UpdateFromURL" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="UpdateTimeout" type="xsd:positiveInteger" minOccurs="0" maxOccurs="1" />
+		</xsd:choice>
+	</xsd:complexType>
+	
+	<xsd:xsd:complexType name="DatabaseTableType" >
+		<xsd:choice>
+			<xsd:element name="TableName" type="xsd:type" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="UpdateDate" type="UpdatePeriodType" minOccurs="0" maxOccurs="1" />
+		</xsd:choice>
+		<xsd:attribute name="class" type="xsd:string" use="optional">
+         <xsd:annotation>
+            <xsd:documentation>The direct class we want to use for this table if we want to use one.</xsd:documentation>
+         </xsd:annotation>
+      </xsd:attribute> 
+	</xsd:xsd:complexType>
+	
+	
+	<xsd:simpleType name="AvailableActionsType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="StopSearch"/>
+			<xsd:enumeration value="Neighborhood"/>
+			<xsd:enumeration value="Crimes"/>
+			<xsd:enumeration value="SpecificForces"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="UpdateTypeType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="manual"/>
+			<xsd:enumeration value="automatic"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="UpdatePeriodType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="seconds"/>
+			<xsd:enumeration value="minutes"/>
+			<xsd:enumeration value="hours"/>
+			<xsd:enumeration value="days"/>
+			<xsd:enumeration value="weeks"/>
+			<xsd:enumeration value="months"/>
+			<xsd:enumeration value="years"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+<xsd:schema>
